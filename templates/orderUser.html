@@ -1,0 +1,458 @@
+<!doctype html>
+<html class="scroll-smooth" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Reshoesncare | Order</title>
+    <!-- logo for website start -->
+    <link
+      rel="icon"
+      href="{{ url_for('static', filename='img/icon-website.jpg') }}"
+    />
+    <!-- logo for website end -->
+
+    <!-- AOS LIBRARY START -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <!-- AOS LIBRARY END -->
+
+    <!-- google font start -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- google font end -->
+
+    <!-- font awesome start -->
+    <script
+      src="https://kit.fontawesome.com/d8c46daaeb.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <!-- font awesome end -->
+
+    <!-- ajax and jquery links start -->
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.js"
+      integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
+    <!-- ajax and jquery links end -->
+
+    <!-- sweet alert start -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- sweet alert end -->
+
+    <link
+      href="{{ url_for('static', filename='css/output.css') }}"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- HEADER START -->
+    <header
+      class="bg-transparent absolute top-0 left-0 w-full flex items-center z-10"
+    >
+      <div class="container">
+        <div class="flex items-center justify-between relative">
+          <div class="px-4">
+            <a href="/home_user/{{id_receive}}" class="block">
+              <div class="w-14 rounded-xl overflow-hidden" id="logo">
+                <img src="../static/img/logo.png" class="w-16" alt="" />
+              </div>
+            </a>
+          </div>
+          <div class="flex items-center px-8">
+            <button
+              id="hamburger"
+              name="hamburger"
+              type="button"
+              class="block absolute right-4 lg:hidden"
+            >
+              <span
+                class="hamburger-line transition duration-300 ease-in-out origin-top-left"
+              ></span>
+              <span
+                class="hamburger-line transition duration-300 ease-in-out"
+              ></span>
+              <span
+                class="hamburger-line transition duration-300 ease-in-out origin-bottom-left"
+              ></span>
+            </button>
+
+            <nav
+              id="nav-menu"
+              class="hidden absolute py-5 bg-white shadow-lg rounded-lg max-w-[250px] w-full right-4 top-full lg:block lg:static lg:bg-transparent lg:max-w-full lg:shadow-none lg:rounded-none"
+            >
+              <ul class="block lg:flex">
+                <li class="group hover:cursor-pointer">
+                  <a
+                    href="/home_user/{{id_receive}}"
+                    class="text-base text-myDark py-2 mx-8 flex items-center group-hover:text-myPrimary"
+                  >
+                    <i class="fa-solid fa-house mr-1"></i>HOME
+                  </a>
+                </li>
+
+                <li class="group hover:cursor-pointer">
+                  <div
+                    class="dropdown dropdown-bottom dropdown-end text-lg text-myDark mx-8 py-2 flex items-center"
+                    id="profile"
+                  >
+                    <div
+                      tabindex="0"
+                      role="button"
+                      class="flex items-center text-3xl normal-case hover:text-myPrimary"
+                    >
+                      <i class="fa-solid fa-circle-user"></i>
+                      <span class="text-base ml-2">{{user_info.id_user}}</span>
+                    </div>
+                    <ul
+                      tabindex="0"
+                      class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
+                    >
+                      <li class="hover:text-myPrimary">
+                        <a onclick="sign_out()"
+                          ><i
+                            class="fa-solid fa-arrow-right-from-bracket mr-1"
+                          ></i
+                          >Logout</a
+                        >
+                      </li>
+                      <li class="hover:text-myPrimary">
+                        <a href="/riwayatPesan_user/{{id_receive}}"
+                          ><i class="fa-regular fa-clipboard mr-1"></i>Riwayat
+                          pemesanan</a
+                        >
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- HEADER END -->
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert alert-success" role="alert">
+          {{message}}
+        </div>
+        {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    <!-- HERO START -->
+    <!-- Container utama dengan flexbox -->
+    <div
+      class="min-h-screen bg-base-200 flex flex-col lg:flex-row items-center justify-center px-4 lg:px-0"
+    >
+      <!-- Bagian "Cara Pemesanan" -->
+      <div
+        class="hero-content text-center lg:text-left lg:max-w-md lg:mr-10 mt-10"
+      >
+        <div>
+          <h1 class="text-5xl font-bold md:text-7xl text-myPrimary">
+            Cara pemesanan
+          </h1>
+          <ul class="steps steps-vertical lg:steps-horizontal mt-10">
+            <li class="step step-warning text-lg">Isi form</li>
+            <li class="step step-warning text-lg">Submit form</li>
+            <li class="step step-warning text-lg">Tunggu status</li>
+            <li class="step step-warning text-lg">Konfirmasi admin</li>
+            <li class="step step-warning text-lg" data-content="✓">
+              Pesanan siap!
+            </li>
+          </ul>
+          <div class="collapse bg-base-200 mt-6">
+            <input type="checkbox" />
+            <div
+              class="collapse-title text-xl font-medium md:text-2xl text-myPrimary"
+            >
+              Click untuk melihat ketentuan pemesanan
+              <i class="fa-solid fa-arrow-down"></i>
+            </div>
+            <div
+              class="collapse-content md:text-xl text-lg bg-myPrimary p-4 rounded-xl text-white"
+            >
+              <p>
+                1. Customer diwajibkan untuk membayar terlebih dahulu dari harga yang
+                tertera pada form
+              </p>
+              <br />
+              <p>
+                2. Untuk melihat riwayat pesan anda bisa klik <a href="/riwayatPesan_user/{{id_receive}}" class="link link-primary"
+                target="_blank">disini</a> atau klik profile anda, lalu klik riwayat pemesanan
+              </p>
+              <br />
+              <p>
+                3. Jarak pengantaran atau pengambilan barang maks 5km dari drop
+                point kami, lebih dari itu diluar tanggung jawab kami
+              </p>
+              <br />
+              <p>
+                4. Jika terdapat bagian yang rusak, tetapi customer tidak
+                menyantumkannya di form bagian kondisi barang diluar tanggung
+                jawab kami
+              </p>
+              <br />
+              <p>
+                5. Pengerjaan dilakukan 3 hari setelah anda melakukan pemesanan
+              </p>
+              <br />
+              <p>
+                6. Jika pesanan sudah siap, anda bisa melihat status pesanan anda <a href="/riwayatPesan_user/{{id_receive}}" class="link link-primary"
+                target="_blank">disini</a> dan jika pesanan anda sudah disetujui oleh admin, anda bisa hubungi kami
+                <a
+                  href="https://wa.me/6281225775455"
+                  class="link link-success"
+                  target="_blank"
+                  >disini</a
+                >
+              </p>
+            </div>
+          </div>
+          <form action="{{url_for('send')}}" method="post" class="notif" target="_blank"></form>
+        </div>
+      </div>
+
+      <!-- Form Pemesanan -->
+      <form action="">
+        <div
+          class="max-w-lg w-full bg-white p-8 rounded-lg shadow-lg my-10 lg:ml-10 mt-16"
+        >
+          <h2 class="text-2xl font-bold mb-6 text-center text-myPrimary">
+            Form Pemesanan
+          </h2>
+
+          <div class="mb-4 w-full">
+            <label for="name" class="block text-sm font-medium text-gray-700"
+              >ID ANDA</label
+            >
+            <input
+              type="text"
+              value="{{id_receive}}"
+              class="input input-bordered w-full mt-2"
+              id="input_id"
+              name="input_id"
+              disabled
+            />
+          </div>
+          <div class="mb-4 w-full">
+            <label for="name" class="block text-sm font-medium text-gray-700"
+              >Nama</label
+            >
+            <input
+              type="text"
+              placeholder="Nama anda"
+              class="input input-bordered input-warning w-full mt-2"
+              name="input_nama"
+              id="input_nama"
+              required
+            />
+          </div>
+          <div class="mb-4 w-full">
+            <label for="phone" class="block text-sm font-medium text-gray-700"
+              >No. Telepon (WA)</label
+            >
+            <input
+              type="number"
+              min="0"
+              placeholder="ex: 081XXXX"
+              class="input input-bordered input-warning w-full mt-2"
+              name="input_notelp"
+              id="input_notelp"
+              required
+            />
+          </div>
+          <div class="mb-4 w-full">
+            <label for="address" class="block text-sm font-medium text-gray-700"
+              >Lokasi terdekat anda dengan drop point kami</label
+            >
+            <select
+              class="select select-warning w-full mt-2"
+              name="input_droppoint"
+              id="input_droppoint"
+              required
+            >
+              <option disabled selected>Pilih lokasi anda</option>
+              <option>Tangerang Selatan</option>
+              <option>Kebayoran Lama</option>
+              <option>Kemanggisan</option>
+              <option>Semarang (Genuk)</option>
+            </select>
+          </div>
+          <div class="mb-4 w-full">
+            <label for="address" class="block text-sm font-medium text-gray-700"
+              >Pilih jenis pengantaran/pengambilan</label
+            >
+            <select
+              class="select select-warning w-full mt-2"
+              name="input_ambilantar"
+              id="input_ambilantar"
+              required
+            >
+              <option disabled selected>Pilih jenis pengambilan/pengantaran</option>
+              <option>Pengantaran (maks jarak 5km dari drop point)</option>
+              <option>Pengambilan</option>
+            </select>
+          </div>
+          <div class="mb-4 w-full">
+            <label for="address" class="block text-sm font-medium text-gray-700"
+              >Pilih jenis layanan</label
+            >
+            <select
+              class="select select-warning w-full mt-2"
+              name="input_layanan"
+              id="input_layanan"
+              required
+            >
+              <option disabled selected>Pilih jenis layanan</option>
+              <option>Deep Clean</option>
+              <option>Fast Clean</option>
+              <option>Unyellowing</option>
+              <option>Leather/Suede</option>
+              <option>Sandals</option>
+            </select>
+          </div>
+          <div class="mb-4 w-full">
+            <label for="name" class="block text-sm font-medium text-gray-700"
+              >Jumlah yang harus dibayar</label
+            >
+            <input
+              type="text"
+              value="0"
+              class="input input-bordered w-full mt-2 text-input-red"
+              id="input_jumlah_dp"
+              name="input_jumlah_dp"
+              disabled
+            />
+          </div>
+          <div class="mb-4 w-full">
+            <label for="address" class="block text-sm font-medium text-gray-700"
+              >Pilih pembayaran</label
+            >
+            <select
+              class="select select-warning w-full mt-2"
+              name="input_dp"
+              id="input_dp"
+              required
+            >
+              <option disabled selected>Pilih jenis pembayaran anda</option>
+              <option>BCA : 4090768609 rintis naufal</option>
+              <option>BNI : 0982155037 rintis naufal</option>
+              <option>
+                SEABANK : 901086488263 rintis Naufal fadillah ilham
+              </option>
+            </select>
+          </div>
+          <div class="mb-4 w-full">
+            <label
+              for="shoe-type"
+              class="block text-sm font-medium text-gray-700"
+              >Upload bukti pembayaran</label
+            >
+            <input
+              type="file"
+              class="file-input file-input-bordered file-input-warning w-full mt-2"
+              name="input_bukti_dp"
+              id="input_bukti_dp"
+              required
+            />
+          </div>
+          <div class="mb-4 w-full">
+            <label
+              for="shoe-type"
+              class="block text-sm font-medium text-gray-700"
+              >Jenis Sepatu</label
+            >
+            <input
+              type="text"
+              placeholder="ex: canvas.."
+              class="input input-bordered input-warning w-full mt-2"
+              name="input_jenis_sepatu"
+              id="input_jenis_sepatu"
+              required
+            />
+          </div>
+          <div class="mb-4 w-full">
+            <label
+              for="shoe-condition"
+              class="block text-sm font-medium text-gray-700"
+              >Kondisi Sepatu</label
+            >
+            <textarea
+              class="textarea textarea-warning mt-2 w-full"
+              placeholder="ex: sobek bagian midsole.."
+              name="input_kondisi"
+              id="input_kondisi"
+            ></textarea>
+          </div>
+          <div class="flex items-center justify-center">
+            <button
+              type="submit"
+              class="bg-myPrimary text-white py-2 px-4 rounded-full hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              id="submitForm"
+            >
+              Submit
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <!-- HERO END -->
+
+    <!-- FOOTER START -->
+    <footer class="bg-slate-200 text-white py-10">
+      <div class="container mx-auto px-6">
+        <div
+          class="mt-6 border-t border-slate-700 pt-6 flex justify-between items-center md:text-lg"
+        >
+          <p class="text-slate-400">
+            © 2024 Reshoesncare. All rights reserved.
+          </p>
+          <div class="flex space-x-4">
+            <a
+              href="https://www.instagram.com/reshoesncare"
+              class="text-slate-400 hover:text-myPrimary"
+              target="_blank"
+              ><i class="fab fa-instagram"></i
+            ></a>
+            <a
+              href="https://www.tiktok.com/@reshoesncare"
+              class="text-slate-400 hover:text-myPrimary"
+              target="_blank"
+              ><i class="fab fa-tiktok"></i
+            ></a>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- FOOTER END -->
+
+    <!-- SCRIPT AOS START -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+      AOS.init();
+    </script>
+    <!-- SCRIPT AOS END -->
+
+    <script src="{{ url_for('static', filename='js/orderUser.js') }}"></script>
+  </body>
+</html>

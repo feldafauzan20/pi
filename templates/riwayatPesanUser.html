@@ -1,0 +1,361 @@
+<!doctype html>
+<html class="scroll-smooth" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Reshoesncare | History</title>
+    <!-- logo for website start -->
+    <link
+      rel="icon"
+      href="{{ url_for('static', filename='img/icon-website.jpg') }}"
+    />
+    <!-- logo for website end -->
+
+    <!-- AOS LIBRARY START -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <!-- AOS LIBRARY END -->
+
+    <!-- google font start -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- google font end -->
+
+    <!-- font awesome start -->
+    <script
+      src="https://kit.fontawesome.com/d8c46daaeb.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <!-- font awesome end -->
+
+    <!-- ajax and jquery links start -->
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.js"
+      integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
+    <!-- ajax and jquery links end -->
+
+    <!-- sweet alert start -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- sweet alert end -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.2/socket.io.js"></script>
+
+    <link
+      href="{{ url_for('static', filename='css/output.css') }}"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-base-200">
+    <!-- HEADER START -->
+    <header
+      class="bg-transparent absolute top-0 left-0 w-full flex items-center z-10"
+    >
+      <div class="container">
+        <div class="flex items-center justify-between relative">
+          <div class="px-4">
+            <a href="/home_user/{{id_receive}}" class="block">
+              <div class="w-14 rounded-xl overflow-hidden" id="logo">
+                <img src="../static/img/logo.png" class="w-16" alt="" />
+              </div>
+            </a>
+          </div>
+          <div class="flex items-center px-8">
+            <button
+              id="hamburger"
+              name="hamburger"
+              type="button"
+              class="block absolute right-4 lg:hidden"
+            >
+              <span
+                class="hamburger-line transition duration-300 ease-in-out origin-top-left"
+              ></span>
+              <span
+                class="hamburger-line transition duration-300 ease-in-out"
+              ></span>
+              <span
+                class="hamburger-line transition duration-300 ease-in-out origin-bottom-left"
+              ></span>
+            </button>
+
+            <nav
+              id="nav-menu"
+              class="hidden absolute py-5 bg-white shadow-lg rounded-lg max-w-[250px] w-full right-4 top-full lg:block lg:static lg:bg-transparent lg:max-w-full lg:shadow-none lg:rounded-none"
+            >
+              <ul class="block lg:flex">
+                <li class="group hover:cursor-pointer">
+                  <a
+                    href="/home_user/{{id_receive}}"
+                    class="text-base text-myDark py-2 mx-8 flex items-center group-hover:text-myPrimary"
+                  >
+                    <i class="fa-solid fa-house mr-1"></i>HOME
+                  </a>
+                </li>
+
+                <li class="group hover:cursor-pointer">
+                  <div
+                    class="dropdown dropdown-bottom dropdown-end text-lg text-myDark mx-8 py-2 flex items-center"
+                    id="profile"
+                  >
+                    <div
+                      tabindex="0"
+                      role="button"
+                      class="flex items-center text-3xl normal-case hover:text-myPrimary"
+                    >
+                      <i class="fa-solid fa-circle-user"></i>
+                      <span class="text-base ml-2">{{user_info.id_user}}</span>
+                    </div>
+                    <ul
+                      tabindex="0"
+                      class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
+                    >
+                      <li class="hover:text-myPrimary">
+                        <a onclick="sign_out()"
+                          ><i
+                            class="fa-solid fa-arrow-right-from-bracket mr-1"
+                          ></i
+                          >Logout</a
+                        >
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- HEADER END -->
+
+    <!-- riwayat pesan start -->
+    <div class="container pt-20 min-h-screen flex items-center justify-center">
+      <div class="hero min-h-screen md:max-w-max bg-base-200">
+        <div class="hero-content flex-col lg:flex-row-reverse w-full">
+          <div class="w-full p-5">
+            
+            <h1 class="text-5xl font-bold text-center text-myPrimary">
+              Riwayat pemesanan anda
+            </h1>
+            <div class="container mx-auto mt-4">
+              <label
+                for="statusFilter"
+                class="block text-sm font-medium text-gray-700"
+                >Filter by Status:</label
+              >
+              <select
+                id="statusFilter"
+                class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                onchange="fetchUserHistory()"
+              >
+                <option value="all">All</option>
+                <option value="completed">Completed</option>
+                <option value="decline">Declined</option>
+                <option value="pending">Pending</option>
+              </select>
+            </div>
+            <div
+              class="md:grid md:grid-cols-2 lg:grid-cols-3"
+              id="riwayatPesanUser"
+            >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- riwayat pesan end -->
+
+    <!-- FOOTER START -->
+    <footer class="bg-slate-200 text-white py-10">
+      <div class="container mx-auto px-6">
+        <div
+          class="mt-6 border-t border-slate-700 pt-6 flex justify-between items-center md:text-lg"
+        >
+          <p class="text-slate-400">
+            © 2024 Reshoesncare. All rights reserved.
+          </p>
+          <div class="flex space-x-4">
+            <a
+              href="https://www.instagram.com/reshoesncare"
+              class="text-slate-400 hover:text-myPrimary"
+              target="_blank"
+              ><i class="fab fa-instagram"></i
+            ></a>
+            <a
+              href="https://www.tiktok.com/@reshoesncare"
+              class="text-slate-400 hover:text-myPrimary"
+              target="_blank"
+              ><i class="fab fa-tiktok"></i
+            ></a>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- FOOTER END -->
+
+    <!-- SCRIPT AOS START -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+      AOS.init();
+    </script>
+    <!-- SCRIPT AOS END -->
+
+    <script>
+      $(document).ready(function () {
+        var socket = io.connect(
+          location.protocol + "//" + document.domain + ":" + location.port
+        );
+        var id_receive = "{{ id_receive }}";
+
+        function loadOrderHistory() {
+          $.getJSON("/data_user", { id_receive: id_receive }, function (data) {
+            var orders = data.user.filter(function(order) {
+              return order.id_user === id_receive;
+            });
+            var orderHistory = $("#riwayatPesanUser");
+            orderHistory.empty();
+            orders.forEach(function (order) {
+              var buktiDpLink = order.file_dp_user
+                ? `<a href="/uploads/${order.file_dp_user}" target="_blank" class="link link-primary">Lihat Bukti DP</a>`
+                : "Tidak ada bukti DP";
+              console.log(`Bukti DP link: ${buktiDpLink}`); // Log untuk memastikan URL benar
+              orderHistory.append(
+                `<div class="card bg-base-100 shadow-xl my-6 mx-3">
+                    <div class="card-body">
+                        <h2 class="card-title">Pesanan anda :</h2>
+                        <p>ID Anda : ${order.id_user}</p>
+                        <p>Tanggal Pesanan Anda : ${order.tanggal_order_masuk
+                        }</p>
+                        <p>Estimasi pesanan selesai : ${order.pesanan_selesai}</p>
+                        <p>Nama Anda : ${order.nama_user}</p>
+                        <p>No. telp Anda : ${order.notelp_user}</p>
+                        <p>Lokasi Terdekat Anda : ${order.droppoint_user}</p>
+                        <p>Jenis pengantaran/pengambilan Anda : ${order.ambilantar_user}</p>
+                        <p>Jenis Layanan : ${order.layanan_user}</p>
+                        <p>Jumlah yang harus dibayar: ${order.jumlah_yang_harus_dibayar}</p>
+                        <p>Jenis Pembayaran : ${order.bank_user}</p>
+                        <p>Bukti pembayaran anda : ${buktiDpLink}</p>
+                        <p>Jenis Sepatu Anda : ${order.jenis_sepatu_user}</p>
+                        <p>Kondisi Sepatu Anda : ${order.kondisi_sepatu_user}</p>
+                        <p>Status Pesanan Anda : ${order.status}</p>
+                    </div>
+                </div>`
+              );
+            });
+          });
+        }
+
+        // Load order history on page load
+        loadOrderHistory();
+
+        // Listen for new order events
+        socket.on("new_order", function (order) {
+          if (order.id_user === id_receive) {
+            var orderHistory = $("#riwayatPesanUser");
+            var buktiDpLink = order.file_dp_user
+              ? `<a href="/uploads/${order.file_dp_user}" target="_blank">Lihat Bukti pembayaran</a>`
+              : "Tidak ada bukti DP";
+            orderHistory.append(
+              `<div class="card bg-base-100 shadow-xl my-6 mx-3">
+                <div class="card-body">
+                  <h2 class="card-title">Pesanan anda :</h2>
+                  <p>ID Anda : ${order.id_user}</p>
+                  <p>Tanggal Pesanan Anda : ${order.tanggal_order_masuk
+                  }</p>
+                  <p>Estimasi pesanan selesai : ${order.pesanan_selesai}</p>
+                  <p>Nama Anda : ${order.nama_user}</p>
+                  <p>No. telp Anda : ${order.notelp_user}</p>
+                  <p>Lokasi Terdekat Anda : ${order.droppoint_user}</p>
+                  <p>Jenis pengantaran/pengambilan Anda : ${order.ambilantar_user}</p>
+                  <p>Jenis Layanan : ${order.layanan_user}</p>
+                  <p>Jumlah yang harus dibayar: ${order.jumlah_yang_harus_dibayar}</p>
+                  <p>Jenis Pembayaran : ${order.bank_user}</p>
+                  <p>Bukti pembayaran anda : ${buktiDpLink}</p>
+                  <p>Jenis Sepatu Anda : ${order.jenis_sepatu_user}</p>
+                  <p>Kondisi Sepatu Anda : ${order.kondisi_sepatu_user}</p>
+                  <p>Status Pesanan Anda : ${order.status}</p>
+                </div>
+              </div>`
+            );
+          }
+        });
+      });
+
+      function fetchUserHistory() {
+        const statusFilter = $("#statusFilter").val();
+        $.ajax({
+            type: "GET",
+            url: "/fetch_user_history",
+            data: { status: statusFilter },
+            success: function (response) {
+                $("#riwayatPesanUser").empty();
+                response.inputs.forEach(function (input) {
+                    if (input.id_user !== "{{ id_receive }}") {
+                        return;
+                    }
+                    let fileLink = input.file_dp_user
+                        ? `<a href="/uploads/${input.file_dp_user}" target="_blank" class="link link-primary">Lihat Bukti pembayaran</a>`
+                        : "NONE";
+                    let reason = input.status === "decline"
+                        ? `<p>Reason: ${input.decline_reason || "No reason provided"}</p>`
+                        : "";
+                    let cardClass = "";
+                    if (input.status === "decline") {
+                        cardClass = "bg-red-500";
+                    } else if (input.status === "completed") {
+                        cardClass = "bg-green-500";
+                    }
+    
+                    let temp_html = `<div class="card bg-base-100 shadow-xl my-6 mx-3 ${cardClass}">
+                        <div class="card-body">
+                            <h2 class="card-title">Pesanan anda :</h2>
+                            <p>ID Anda : ${input.id_user}</p>
+                            <p>Tanggal Pesanan Anda : ${input.tanggal_order_masuk}</p>
+                            <p>Estimasi pesanan selesai : ${input.pesanan_selesai}</p>
+                            <p>Nama Anda : ${input.nama_user}</p>
+                            <p>No. telp Anda : ${input.notelp_user}</p>
+                            <p>Lokasi Terdekat Anda : ${input.droppoint_user}</p>
+                            <p>Jenis Layanan : ${input.layanan_user}</p>
+                            <p>Jumlah yang harus dibayar: ${input.jumlah_yang_harus_dibayar}</p>
+                            <p>Jenis Pembayaran : ${input.bank_user}</p>
+                            <p>Bukti pembayaran : ${fileLink}</p>
+                            <p>Jenis Sepatu Anda : ${input.jenis_sepatu_user}</p>
+                            <p>Kondisi Sepatu Anda : ${input.kondisi_sepatu_user}</p>
+                            <p>Status Pesanan Anda : ${input.status}</p>
+                            <p>notes decline :  ${input.note_decline}</p>
+                        </div>
+                    </div>`;
+                    $("#riwayatPesanUser").append(temp_html);
+                });
+            },
+            error: function (error) {
+                alert("Error fetching user history");
+            }
+        });
+    }
+    
+    $(document).ready(function () {
+        fetchUserHistory();
+    });
+    
+    </script>
+
+    <script src="{{ url_for('static', filename='js/riwayatPesanUser.js') }}"></script>
+  </body>
+</html>

@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin | Order</title>
+    <!-- logo for website start -->
+    <link
+      rel="icon"
+      href="{{ url_for('static', filename='img/icon-website.jpg') }}"
+    />
+    <!-- logo for website end -->
+
+    <!-- google font start -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- google font end -->
+
+    <!-- font awesome start -->
+    <script
+      src="https://kit.fontawesome.com/d8c46daaeb.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <!-- font awesome end -->
+
+    <!-- ajax and jquery links start -->
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.js"
+      integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"
+      integrity="sha512-3j3VU6WC5rPQB4Ld1jnLV7Kd5xr+cq9avvhwqzbH/taCRNURoeEpoPBK9pDyeukwSxwRPJ8fDgvYXd6SkaZ2TA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <!-- ajax and jquery links end -->
+
+    <!-- web socket start -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.min.js"></script>
+    <!-- web socket end -->
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <link
+      href="{{ url_for('static', filename='css/output.css') }}"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body class="flex h-screen bg-gray-100">
+    <!-- Mobile Menu Button -->
+    <div class="md:hidden p-4 relative">
+      <button
+        id="menu-button"
+        class="text-myDark focus:outline-none absolute z-10"
+      >
+        <svg
+          id="menu-icon"
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h16m-7 6h7"
+          />
+        </svg>
+        <svg
+          id="close-icon"
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6 hidden"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M6 18L18 6M6 6l12 12"
+          />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Sidebar -->
+    <div
+      id="sidebar"
+      class="w-64 h-full bg-orange-300 text-white flex flex-col transition ease-in-out duration-300 absolute md:relative -translate-x-full md:translate-x-0 z-[9999]"
+    >
+      <div class="p-4">
+        <h1 class="text-2xl font-bold text-center">Admin Panel</h1>
+      </div>
+      <nav class="flex-1 px-2 space-y-2">
+        <a
+          href="/dashboardAdmin"
+          class="block py-2.5 px-4 rounded hover:bg-orange-600"
+          >Dashboard</a
+        >
+        <a
+          href="/orderAdmin"
+          class="block py-2.5 px-4 rounded hover:bg-orange-600"
+          >Order</a
+        >
+        <a
+          onclick="sign_out()"
+          class="block py-2.5 px-4 rounded hover:bg-red-500 hover:text-white text-red-500 hover:cursor-pointer"
+          >Logout</a
+        >
+      </nav>
+    </div>
+
+    <!-- Main content -->
+    <div class="flex-1 p-10 h-full w-full font-poppins overflow-auto">
+      <h2 class="text-3xl font-semibold text-slate-800 text-center">
+        Hi Admin ^_^
+      </h2>
+      <div class="container mx-auto">
+        <label
+          for="statusFilter"
+          class="block text-sm font-medium text-gray-700"
+          >Filter by Status:</label
+        >
+        <select
+          id="statusFilter"
+          class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+        >
+          <option value="all">All</option>
+          <option value="completed">Completed</option>
+          <option value="decline">Declined</option>
+          <option value="pending">Pending</option>
+        </select>
+      </div>
+      <div
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 h-auto m-4 box-border font-semibold"
+        id="inputFromUser"
+      >
+        <!-- Cards akan ditambahkan dinamis oleh JavaScript -->
+
+      </div>
+    </div>
+    <script>
+      $(document).ready(function () {
+        const socket = io();
+    
+        socket.on("new_order", function (input) {
+            let fileLink = input.file_dp_user
+                ? `<a href="/static/img/uploads/${input.file_dp_user.filename}" target="_blank" class="link link-primary">Bukti pembayaran</a>`
+                : "None";
+            let temp_html = `<div class="card bg-base-100 shadow-xl">
+                <div class="card-body">
+                    <p>Nomor orderan : ${input.num}</p>
+                    <p>Tanggal Pesanan Anda : ${input.tanggal_order_masuk}</p>
+                    <p>Pesanan harus diselesaikan sebelum : ${input.pesanan_selesai}</p>
+                    <p>Nama Customer : ${input.nama_user}</p>
+                    <p>Nomer Telepon : ${input.notelp_user}</p>
+                    <p>Lokasi terdekat : ${input.droppoint_user}</p>
+                    <p>Jenis Layanan : ${input.layanan_user}</p>
+                    <p>Jumlah yang harus dibayar : ${input.jumlah_yang_harus_dibayar}</p>
+                    <p>Pilih pembayaran : ${input.bank_user}</p>
+                    <p>Bukti pembayaran : ${fileLink}</p>
+                    <p>jenis Sepatu Customer : ${input.jenis_sepatu_user}</p>
+                    <p>kondisi Sepatu Customer : ${input.kondisi_sepatu_user}</p>
+                    <p>status pesanan : ${input.status}</p>
+                    <p>note_decline : ${input.note_decline}</p>
+                    <input type="text" placeholder="notes for decline" id="notes" data-order-num="${input.num}" class="notes input input-bordered input-sm w-full max-w-xs"/>
+                    <div class="card-actions justify-center mt-4">
+                        <button class="btn btn-success" onclick="approve('${input.num}', 'completed')"><i class="fa-solid fa-check"></i></button>
+                        <button class="btn btn-error" onclick="updateStatus('${input.num}', 'decline')"><i class="fa-solid fa-x text-white text-lg"></i></button>
+                    </div>
+                </div>
+            </div>`;
+            $("#inputFromUser").append(temp_html);
+        });
+    
+        function fetchInputs() {
+            const statusFilter = $("#statusFilter").val();
+            $.ajax({
+                type: "GET",
+                url: "/fetch_inputs",
+                data: { status: statusFilter },
+                success: function (response) {
+                    $("#inputFromUser").empty();
+                    response.inputs.forEach(function (input) {
+                        let fileLink = input.file_dp_user
+                            ? `<a href="/static/img/uploads/user/${input.file_dp_user}" class="link link-primary" target="_blank">Bukti pembayaran</a>`
+                            : "None";
+                        let declineReason =
+                            input.status === "decline"
+                                ? `<p>Reason for Decline: ${input.decline_reason}</p>`
+                                : "";
+                        let cardClass =
+                            input.status === "completed"
+                                ? "bg-green-500" 
+                                : input.status === "decline"
+                                    ? "bg-red-500"
+                                    : "";
+                        let temp_html = `<div class="card bg-base-100 shadow-xl overflow-hidden">
+                            <div class="card-body ${cardClass}">
+                                <p>Nomor orderan : ${input.num}</p>
+                                <p>Tanggal Pesanan Anda : ${input.tanggal_order_masuk}</p>
+                                <p>Pesanan harus diselesaikan sebelum : ${input.pesanan_selesai}</p>
+                                <p>Nama Customer : ${input.nama_user}</p>
+                                <p>Nomer Telepon : ${input.notelp_user}</p>
+                                <p>Lokasi terdekat : ${input.droppoint_user}</p>
+                                <p>Jenis Layanan : ${input.layanan_user}</p>
+                                <p>Jumlah yang harus dibayar : ${input.jumlah_yang_harus_dibayar}</p>
+                                <p>Pilih pembayaran : ${input.bank_user}</p>
+                                <p>Bukti pembayaran : ${fileLink}</p>
+                                <p>jenis Sepatu Customer : ${input.jenis_sepatu_user}</p>
+                                <p>kondisi Sepatu Customer : ${input.kondisi_sepatu_user}</p>
+                                <p>status pesanan : ${input.status}</p>
+                                <p>note_decline : ${input.note_decline}</p>
+                                <input type="text" placeholder="notes for decline" name="note_decline" id="notes" data-order-num="${input.num}" class="notes input input-bordered input-sm w-full max-w-xs" required/>
+                                <div class="card-actions justify-center mt-4">
+                                    <button class="btn btn-accent" onclick="approve('${input.num}', 'completed')"><i class="fa-solid fa-check text-white text-lg"></i></button>
+                                    <button class="btn btn-error" onclick="updateStatus('${input.num}', 'decline')"><i class="fa-solid fa-x text-white text-lg"></i></button>
+                                </div>
+                            </div>`;
+                        $("#inputFromUser").append(temp_html);
+                    });
+                },
+                error: function (error) {
+                    alert("Error fetching inputs");
+                },
+            });
+        }
+    
+        window.fetchInputs = fetchInputs;
+    
+        fetchInputs();
+
+        $('#statusFilter').on('change', function () {
+            fetchInputs();
+        });
+    });
+    
+    function updateStatus(num, status) {
+        console.log(num);
+        const noteElement = $(`.notes[data-order-num='${num}']`);
+        const notes = noteElement.val();
+        console.log(notes);
+    
+        const data = { num: num, note_decline: notes };
+    
+        $.ajax({
+            type: "POST",
+            url: "/decline_status",
+            contentType: "application/json",
+            data: JSON.stringify(data),
+            success: function (response) {
+                if (response.result === "success") {
+                    console.log("Status updated successfully.");
+                    fetchInputs();
+                } else {
+                    console.error("Gagal memperbarui status pesanan.");
+                    alert("Gagal memperbarui status pesanan.");
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error("Kesalahan dalam memperbarui status pesanan:", error);
+                alert("Kesalahan dalam memperbarui status pesanan:", error);
+            },
+        });
+    }
+    
+    function approve(num, status) {
+        console.log(num);
+        const noteElement = $(`.notes[data-order-num='${num}']`);
+        const notes = "none";
+        console.log(notes);
+    
+        const data = { num: num, note_decline: notes };
+    
+        $.ajax({
+            type: "POST",
+            url: "/update_status",
+            contentType: "application/json",
+            data: JSON.stringify(data),
+            success: function (response) {
+                if (response.result === "success") {
+                    console.log("Status updated successfully.");
+                    fetchInputs();
+                } else {
+                    console.error("Gagal memperbarui status pesanan.");
+                    alert("Gagal memperbarui status pesanan.");
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error("Kesalahan dalam memperbarui status pesanan:", error);
+                alert("Kesalahan dalam memperbarui status pesanan:", error);
+            },
+        });
+    }
+    
+    const menuButton = document.getElementById("menu-button");
+    const sidebar = document.getElementById("sidebar");
+    const menuIcon = document.getElementById("menu-icon");
+    const closeIcon = document.getElementById("close-icon");
+    
+    menuButton.addEventListener("click", () => {
+        sidebar.classList.toggle("-translate-x-full");
+        sidebar.classList.toggle("translate-x-0");
+        menuIcon.classList.toggle("hidden");
+        closeIcon.classList.toggle("hidden");
+    });
+    
+    // Optional: close sidebar when clicking outside menu on mobile
+    document.addEventListener("click", (e) => {
+        if (!sidebar.contains(e.target) && !menuButton.contains(e.target)) {
+            sidebar.classList.add("-translate-x-full");
+            sidebar.classList.remove("translate-x-0");
+            menuIcon.classList.remove("hidden");
+            closeIcon.classList.add("hidden");
+        }
+    });
+
+    function sign_out() {
+      Swal.fire({
+          title: 'Are you sure?',
+          text: 'You will be logged out!',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonText: 'Yes, logout',
+          cancelButtonText: 'Cancel',
+          reverseButtons: true
+      }).then((result) => {
+          if (result.isConfirmed) {
+              // Jika pengguna mengonfirmasi logout
+              $.removeCookie('mytoken', { path: '/' });
+              Swal.fire({
+                  title: 'Logged Out!',
+                  text: 'You have been logged out successfully.',
+                  icon: 'success',
+                  timer: 1500,
+                  timerProgressBar: true,
+                  showConfirmButton: false
+              }).then(() => {
+                  // Redirect ke halaman login setelah logout
+                  window.location.href = '/';
+              });
+          }
+      });
+  }
+  
+    
+    
+    </script>
+    <!-- <script src="{{ url_for('static', filename='js/orderAdmin.js') }}"></script> -->
+  </body>
+</html>

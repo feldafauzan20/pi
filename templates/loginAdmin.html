@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reshoesncare</title>
+    <link rel="icon" href="{{ url_for('static', filename='img/icon-website.jpg') }}" />
+    <script
+      src="https://kit.fontawesome.com/d8c46daaeb.js"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.js"
+      integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"
+      integrity="sha512-3j3VU6WC5rPQB4Ld1jnLV7Kd5xr+cq9avvhwqzbH/taCRNURoeEpoPBK9pDyeukwSxwRPJ8fDgvYXd6SkaZ2TA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <link
+      href="{{ url_for('static', filename='css/output.css') }}"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="flex items-center justify-center min-h-screen bg-orange-100">
+    <div
+      class="w-full max-w-md p-8 space-y-6 bg-orange-300 rounded-lg shadow-md mx-6"
+    >
+      <button class="absolute" onclick="window.location.href='/'">
+        <div class="border-l-2 border-t-2 -rotate-45 w-3 h-3 hover:border-orange-500"></div>
+      </button>
+      <!-- Login Form -->
+      <div id="login-form">
+        <h2 class="text-2xl font-bold text-center text-orange-700">Login sebagai Admin</h2>
+        <form class="space-y-6" onsubmit="event.preventDefault(); sign_in_admin();">
+          <div>
+            <label class="input input-bordered flex items-center gap-2 mt-4">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 16 16"
+                fill="currentColor"
+                class="w-4 h-4 opacity-70 text-orange-900"
+              >
+                <path
+                  d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM12.735 14c.618 0 1.093-.561.872-1.139a6.002 6.002 0 0 0-11.215 0c-.22.578.254 1.139.872 1.139h9.47Z"
+                />
+              </svg>
+              <input
+                type="text"
+                class="grow"
+                placeholder="ID"
+                id="id"
+                name="id_give"
+              />
+            </label>
+          </div>
+          <div>
+            <label class="input input-bordered flex items-center gap-2">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 16 16"
+                fill="currentColor"
+                class="w-4 h-4 opacity-70 text-orange-900"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M14 6a4 4 0 0 1-4.899 3.899l-1.955 1.955a.5.5 0 0 1-.353.146H5v1.5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-2.293a.5.5 0 0 1 .146-.353l3.955-3.955A4 4 0 1 1 14 6Zm-4-2a.75.75 0 0 0 0 1.5.5.5 0 0 1 .5.5.75.75 0 0 0 1.5 0 2 2 0 0 0-2-2Z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+              <input
+                type="password"
+                class="grow"
+                placeholder="Password"
+                id="password"
+                name="password_give"
+              />
+            </label>
+          </div>
+          <div>
+            <button
+              type="submit"
+              class="w-full px-4 py-2 text-white bg-orange-600 rounded-lg hover:bg-orange-500 focus:outline-none focus:ring-2 focus:ring-myPrimary focus:ring-offset-2"
+            >
+              Login
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/loginAdmin.js') }}"></script>
+  </body>
+</html>

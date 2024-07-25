@@ -1,0 +1,886 @@
+<!doctype html>
+<html class="scroll-smooth" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Reshoesncare | Home</title>
+    <!-- logo for website start -->
+    <link rel="icon" href="{{ url_for('static', filename='img/icon-website.jpg') }}" />
+    <!-- logo for website end -->
+
+    <!-- AOS LIBRARY START -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <!-- AOS LIBRARY END -->
+
+    <!-- google font start -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- google font end -->
+
+    <!-- font awesome start -->
+    <script
+      src="https://kit.fontawesome.com/d8c46daaeb.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <!-- font awesome end -->
+
+    <!-- ajax and jquery links start -->
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.js"
+      integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
+
+    <!-- ajax and jquery links end -->
+
+    <!-- sweet alert start -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- sweet alert end -->
+
+    <link
+      href="{{ url_for('static', filename='css/output.css') }}"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- HEADER START -->
+    <header
+      class="bg-transparent absolute top-0 left-0 w-full flex items-center z-10"
+    >
+      <div class="container">
+        <div class="flex items-center justify-between relative">
+          <div class="px-4">
+            <a href="#home" class="block">
+              <div class="w-14 rounded-xl overflow-hidden" id="logo">
+                <img src="../static/img/logo.png" class="w-16" alt="" />
+              </div>
+            </a>
+          </div>
+          <div class="flex items-center px-8">
+            <button
+              id="hamburger"
+              name="hamburger"
+              type="button"
+              class="block absolute right-4 lg:hidden"
+            >
+              <span
+                class="hamburger-line transition duration-300 ease-in-out origin-top-left"
+              ></span>
+              <span
+                class="hamburger-line transition duration-300 ease-in-out"
+              ></span>
+              <span
+                class="hamburger-line transition duration-300 ease-in-out origin-bottom-left"
+              ></span>
+            </button>
+
+            <nav
+              id="nav-menu"
+              class="hidden absolute py-5 bg-white shadow-lg rounded-lg max-w-[250px] w-full right-4 top-full lg:block lg:static lg:bg-transparent lg:max-w-full lg:shadow-none lg:rounded-none"
+            >
+              <ul class="block lg:flex">
+                <li class="group hover:cursor-pointer">
+                  <a href="#home" class="text-base text-myDark py-2 mx-8 flex items-center group-hover:text-myPrimary">
+                    <i class="fa-solid fa-house mr-1"></i>HOME
+                  </a>
+                </li>
+                <li class="group hover:cursor-pointer">
+                  <a
+                    href="#about"
+                    class="text-base text-myDark py-2 mx-8 flex items-center group-hover:text-myPrimary"
+                    > <i class="fas fa-info-circle mr-1"></i> ABOUT US</a
+                  >
+                </li>
+                <li class="group hover:cursor-pointer">
+                  <a
+                    href="#services"
+                    class="text-base text-myDark py-2 mx-8 flex items-center group-hover:text-myPrimary"
+                    ><i class="fa-solid fa-spray-can-sparkles mr-1"></i> SERVICES</a
+                  >
+                </li>
+                <li class="group hover:cursor-pointer">
+                  <a
+                    href="#droppoint"
+                    class="text-base text-myDark py-2 mx-8 flex items-center group-hover:text-myPrimary"
+                    ><i class="fa-solid fa-location-dot mr-1"></i>DROP POINT</a
+                  >
+                </li>
+                <li class="group hover:cursor-pointer">
+                  <a
+                    href="#help"
+                    class="text-base text-myDark py-2 mx-8 flex items-center group-hover:text-myPrimary"
+                    ><i class="fa-solid fa-headset mr-1"></i>HELP</a
+                  >
+                </li>
+                <li class="group hover:cursor-pointer">
+                  <a
+                    href="/order_user/{{id_receive}}"
+                    class="text-base text-myDark py-2 mx-8 flex items-center group-hover:text-myPrimary"
+                    ><i class="fa-solid fa-cart-shopping mr-1"></i>ORDER</a
+                  >
+                </li>
+                <li class="group hover:cursor-pointer">
+                  <div
+                    class="dropdown dropdown-bottom dropdown-end text-lg text-myDark mx-8 py-2 flex items-center"
+                    id="profile"
+                  >
+                    <div
+                      tabindex="0"
+                      role="button"
+                      class="flex items-center text-3xl normal-case hover:text-myPrimary"
+                    >
+                      <i class="fa-solid fa-circle-user"></i>
+                      <span class="text-base ml-2">{{user_info.id_user}}</span>
+                    </div>
+                    <ul
+                      tabindex="0"
+                      class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
+                    >
+                      <li class="hover:text-myPrimary">
+                        <a onclick="sign_out()"><i class="fa-solid fa-arrow-right-from-bracket mr-1"></i>Logout</a>
+                      </li>
+                      <li class="hover:text-myPrimary">
+                        <a href="/riwayatPesan_user/{{id_receive}}"><i class="fa-regular fa-clipboard mr-1"></i>Riwayat pemesanan</a>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- HEADER END -->
+
+    <!-- HERO SECTION START -->
+    <section id="home" class="flex items-center h-screen overflow-x-hidden">
+      <div class="container mx-auto px-4">
+        <div class="w-full flex h-full">
+          <div class="md:flex md:flex-col w-full">
+            <h1
+              class="text-5xl font-poppins font-semibold text-slate-500 text-center lg:text-6xl lg:mx-40"
+            >
+              <div class="animate-wiggleCustom inline-block">👋</div>
+              HELLO
+            </h1>
+            <h1
+              class="text-5xl font-poppins font-semibold text-myPrimary text-center lg:text-6xl lg:mx-40 max-w-full"
+            >
+              {{user_info.id_user}}
+            </h1>
+            <h2
+              class="font-poppins px-4 py-5 text-myDark text-justify sm:mx-2 sm:tracking-tight md:tracking-normal md:text-center md:text-xl lg:text-center lg:text-xl lg:px-52 te-100"
+            >
+              Dapatkan sepatu Anda menjadi bersih dan segar seperti baru.
+              Nikmati kenyamanan tanpa repot dengan layanan pencucian sepatu
+              kami. Bawa sepatu kotor Anda hari ini untuk mendapatkan hasil yang
+              sempurna.
+            </h2>
+            <div class="flex justify-center md:flex md:justify-center">
+              <a
+                href="/order_user/{{id_receive}}"
+                class="bg-myPrimary text-base py-3 mx-4 px-8 rounded-full text-slate-100 hover:opacity-80 transition duration-300 ease-in-out lg:text-center lg:w-60 lg:font-bold"
+                >ORDER HERE</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- HERO SECTION END -->
+
+    <!-- ABOUT SECTION START -->
+    <section
+      id="about"
+      class="w-full overflow-hidden pt-[60px] bg-myPrimary bg-opacity-80"
+    >
+      <div class="container py-10 px-4 mx-auto">
+        <h1
+          class="text-3xl text-slate-100 font-montserrat font-bold text-center md:text-4xl lg:text-5xl"
+          data-aos="fade-down"
+          data-aos-duration="1000"
+        >
+          ABOUT US
+        </h1>
+        <div class="flex flex-col items-center justify-center">
+          <p
+            class="font-poppins text-slate-100 my-5 leading-relaxed text-left max-w-xl sm:max-w-full md:max-w-full md:text-xl lg:max-w-screen-lg lg:text-center lg:text-2xl md:text-center"
+            data-aos="fade-right"
+            data-aos-duration="1000"
+            data-aos-delay="100"
+          >
+            Didirikan pada oktober 2022,
+            <span class="font-semibold text-2xl text-white">Reshoesncare</span>
+            adalah perusahaan yang bergerak di bidang perawatan dan kebersihan.
+            Kami menyediakan berbagai layanan yang ditujukan untuk pemeliharaan
+            dan pembersihan barang-barang pribadi Anda, seperti sepatu dan
+            sandal. Kami menerima semua jenis sepatu dan sandal, dan memastikan
+            setiap item mendapatkan perawatan terbaik sesuai standard
+            operasional kami.
+          </p>
+
+          <div
+            class="text-center"
+            data-aos="fade-left"
+            data-aos-duration="1000"
+            data-aos-delay="150"
+          >
+            <h4
+              class="font-poppins text-mySecondary font-bold text-lg md:text-xl lg:text-2xl"
+            >
+              FOLLOW OUR SOCIAL MEDIA!
+            </h4>
+          </div>
+          <div
+            class="flex items-center mt-2"
+            data-aos="fade-up"
+            data-aos-duration="1000"
+            data-aos-delay="200"
+          >
+            <!-- instagram -->
+            <a
+              href="https://www.instagram.com/reshoesncare"
+              target="_blank"
+              class="w-9 h-9 mr-3 rounded-full flex justify-center items-center border border-white hover:bg-mySecondary hover:border-mySecondary text-white hover:text-slate-950"
+            >
+              <svg
+                role="img"
+                width="20"
+                class="fill-current"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <title>Instagram</title>
+                <path
+                  d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"
+                />
+              </svg>
+            </a>
+
+            <!-- tiktok -->
+            <a
+              href="https://www.tiktok.com/@reshoesncare"
+              target="_blank"
+              class="w-9 h-9 mr-3 rounded-full flex justify-center items-center border border-white hover:bg-mySecondary hover:border-mySecondary text-white hover:text-slate-950"
+            >
+              <svg
+                role="img"
+                width="20"
+                class="fill-current"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <title>TikTok</title>
+                <path
+                  d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"
+                />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- ABOUT SECTION END-->
+
+    <!-- SERVICES SECTION START -->
+    <section id="services" class="px-4 pt-24 mb-24">
+      <h1
+        class="text-center mb-6 text-3xl font-montserrat text-myPrimary font-bold md:text-4xl"
+        data-aos="fade-down"
+        data-aos-duration="1000"
+      >
+        OUR SERVICES
+      </h1>
+      <div
+        class="container mx-auto px-6 sm:flex flex-wrap lg:gap-14 sm:gap-3 sm:justify-evenly mt-11"
+      >
+        <!-- Card for Deep Clean -->
+        <div
+          class="flex flex-col rounded-xl shadow-lg h-auto overflow-hidden mb-10 bg-slate-100 sm:w-64 md:w-80 lg:w-80"
+          data-aos="flip-left"
+          data-aos-duration="1000"
+          data-aos-delay="50"
+        >
+          <div class="flex justify-center">
+            <img src="{{ url_for('static', filename='img/bg-deep-clean.png') }}" alt="" class="w-2/4" />
+          </div>
+          <div class="flex flex-col flex-1 px-6 py-4 group">
+            <div class="font-bold text-2xl text-slate-700 mb-2 md:text-3xl">
+              Deep Clean
+            </div>
+            <p class="text-lg md:text-lg text-green-400">
+              <i class="fa-solid fa-sack-dollar mr-1"></i>40.000
+            </p>
+            <p class="text-base text-slate-600 md:text-lg">
+              Proses pembersihan yang menyeluruh, mencakup semua bagian sepatu
+              hingga ke dalamnya, termasuk insole, sehingga setiap kotoran dan
+              noda dapat dihilangkan sepenuhnya.
+            </p>
+          </div>
+        </div>
+        <!-- Card for Fast Clean -->
+        <div
+          class="flex flex-col rounded-xl shadow-lg h-auto overflow-hidden mb-10 bg-slate-100 sm:w-64 md:w-80 lg:w-80"
+          data-aos="flip-left"
+          data-aos-duration="1000"
+          data-aos-delay="150"
+        >
+          <div class="flex justify-center">
+            <img
+              src="{{ url_for('static', filename='img/bg-fast-clean.png') }}"
+              alt=""
+              class="w-2/4 pt-4"
+            />
+          </div>
+          <div class="flex flex-col flex-1 px-6 py-4 group">
+            <div class="font-bold text-2xl text-slate-700 mb-2 md:text-3xl">
+              Fast Clean
+            </div>
+            <p class="text-lg md:text-lg text-green-400">
+              <i class="fa-solid fa-sack-dollar mr-1"></i>35.000
+            </p>
+            <p class="text-base text-slate-600 md:text-lg">
+              Proses pembersihan yang mencakup bagian luar atau kulit sepatu,
+              sehingga setiap kotoran dan noda dapat dihilangkan sepenuhnya
+              dengan menggunakan ramuan ajaib kami.
+            </p>
+          </div>
+        </div>
+        <!-- Card for Unyellowing -->
+        <div
+          class="flex flex-col rounded-xl shadow-lg h-auto overflow-hidden mb-10 bg-slate-100 sm:w-64 md:w-80 lg:w-80"
+          data-aos="flip-left"
+          data-aos-duration="1000"
+          data-aos-delay="250"
+        >
+          <div class="flex justify-center">
+            <img src="{{ url_for('static', filename='img/bg-unyellowing.png') }}" alt="" class="w-2/4" />
+          </div>
+          <div class="flex flex-col flex-1 px-6 py-4 group">
+            <div class="font-bold text-2xl text-slate-700 mb-2 md:text-3xl">
+              Unyellowing
+            </div>
+            <p class="text-lg md:text-lg text-green-400">
+              <i class="fa-solid fa-sack-dollar mr-1"></i>45.000
+            </p>
+            <p class="text-base text-slate-600 md:text-lg">
+              Proses pembersihan yang mencakup bagian midsole sepatu, sehingga
+              setiap kotoran dan noda dapat dihilangkan sepenuhnya dengan
+              menggunakan ramuan ajaib kami.
+            </p>
+          </div>
+        </div>
+        <!-- Card for Leather/suede -->
+        <div
+          class="flex flex-col rounded-xl shadow-lg h-auto overflow-hidden mb-10 bg-slate-100 sm:w-64 md:w-80 lg:w-80"
+          data-aos="flip-left"
+          data-aos-duration="1000"
+          data-aos-delay="350"
+        >
+          <div class="flex justify-center">
+            <img src="{{ url_for('static', filename='img/bg-leather-suede.png') }}" alt="" class="w-2/4" />
+          </div>
+          <div class="flex flex-col flex-1 px-6 py-4 group">
+            <div class="font-bold text-2xl text-slate-700 mb-2 md:text-3xl">
+              Leather/Suede
+            </div>
+            <p class="text-lg md:text-lg text-green-400">
+              <i class="fa-solid fa-sack-dollar mr-1"></i>45.000
+            </p>
+            <p class="text-base text-slate-600 md:text-lg">
+              Proses pembersihan yang mencakup sepatu berbahan kulit atau suede,
+              sehingga setiap kotoran dan noda dapat dihilangkan sepenuhnya
+              dengan menggunakan ramuan ajaib kami.
+            </p>
+          </div>
+        </div>
+        <!-- Card for Sandal -->
+        <div
+          class="flex flex-col rounded-xl shadow-lg h-auto overflow-hidden mb-10 bg-slate-100 sm:w-64 md:w-80 lg:w-80"
+          data-aos="flip-left"
+          data-aos-duration="1000"
+          data-aos-delay="450"
+        >
+          <div class="flex justify-center">
+            <img src="{{ url_for('static', filename='img/bg-sandal.png') }}" alt="" class="w-3/4" />
+          </div>
+          <div class="flex flex-col flex-1 px-6 py-4 group">
+            <div class="font-bold text-2xl text-slate-700 mb-2 md:text-3xl">
+              Sandals (all variants)
+            </div>
+            <p class="text-lg md:text-lg text-green-400">
+              <i class="fa-solid fa-sack-dollar mr-1"></i>30.000
+            </p>
+            <p class="text-base text-slate-600 md:text-lg">
+              Proses pembersihan yang mencakup semua jenis sandal anda, sehingga
+              setiap kotoran dan noda dapat dihilangkan sepenuhnya dengan
+              menggunakan ramuan ajaib kami.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- SERVICES SECTION END -->
+
+    <!-- droppoint SECTION START -->
+    <section id="droppoint" class="px-4 pt-24 pb-24 bg-myPrimary bg-opacity-80">
+      <h1
+        class="text-center mb-6 text-3xl font-montserrat text-slate-100 font-bold md:text-4xl"
+        data-aos="fade-down"
+        data-aos-duration="1000"
+      >
+        OUR DROP POINT📍
+      </h1>
+      <div class="flex justify-center">
+        <div
+          class="text-center mb-10 w-full py-3 rounded-lg shadow-lg font-poppins shadow-orange-400 bg-slate-100 relative sm:w-3/4 md:h-1/2 md:w-1/2"
+          data-aos="fade-right"
+          data-aos-duration="1000"
+          data-aos-delay="100"
+        >
+          <span
+            class="relative flex h-4 w-4 -top-4 right-1.5 lg:h-7 lg:w-7 md:w-6 md:h-6"
+          >
+            <span
+              class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"
+            ></span>
+            <span
+              class="relative inline-flex rounded-full h-4 w-4 lg:h-7 lg:w-7 md:w-6 md:h-6 bg-red-500"
+            ></span>
+          </span>
+          <h1 class="text-myPrimary mb-2 text-xl font-semibold md:text-2xl">
+            APA ITU DROP POINT?
+          </h1>
+          <hr />
+          <p class="mt-4 text-myPrimary mx-4 text-base md:text-xl">
+            Drop point adalah tempat bertemu antara kami dengan anda, untuk
+            pengambilan atau penjemputan sepatu yang berada di dekat drop point
+            kami.
+            <span class="text-red-500 text-lg md:text-2xl"
+              >⚠️BUKAN CABANG KAMI⚠️</span
+            >
+          </p>
+        </div>
+      </div>
+      <div
+        class="container max-w-full mx-auto grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 px-6 lg:w-4/5 lg:gap-10"
+      >
+        <!-- Card for Tangerang Selatan -->
+        <div
+          class="flex bg-slate-100 flex-col rounded-xl shadow-lg overflow-hidden"
+          data-aos="flip-left"
+          data-aos-duration="1000"
+          data-aos-delay="50"
+        >
+          <div style="overflow: hidden; max-width: 100%; height: 300px">
+            <div
+              id="display-google-map"
+              style="height: 100%; width: 100%; max-width: 100%"
+            >
+              <iframe
+                style="height: 100%; width: 100%; border: 0"
+                frameborder="0"
+                src="https://www.google.com/maps/embed/v1/place?q=pondok+safari+indah&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8"
+              ></iframe>
+            </div>
+            <a
+              class="googl-ehtml"
+              href="https://www.bootstrapskins.com/themes"
+              id="get-data-for-map"
+              >premium bootstrap themes</a
+            >
+            <style>
+              #display-google-map img {
+                max-width: none !important;
+                background: none !important;
+                font-size: inherit;
+                font-weight: inherit;
+              }
+            </style>
+          </div>
+
+          <div class="flex flex-col flex-1 px-4 py-4 group">
+            <div class="font-bold text-2xl text-slate-700 mb-2 md:text-3xl">
+              Tangerang Selatan📍
+            </div>
+            <div class="flex flex-col flex-1 justify-end group">
+              <hr />
+              <div class="flex items-center justify-between">
+                <a
+                  href="https://www.google.com/maps/dir//Pondok+Safari+Indah+West+Jurang+Manggu+Pondok+Aren+South+Tangerang+City,+Banten+15223/@-6.2620786,106.7297327,16z/data=!4m8!4m7!1m0!1m5!1m1!1s0x2e69f07de6955b01:0x6ce646d332b34fcd!2m2!1d106.7297327!2d-6.2620786?entry=ttu"
+                  target="_blank"
+                  class="underline mt-2 whitespace-nowrap"
+                  >Lihat selengkapnya</a
+                >
+                <a
+                  href="https://www.google.com/maps/dir//Pondok+Safari+Indah+West+Jurang+Manggu+Pondok+Aren+South+Tangerang+City,+Banten+15223/@-6.2620786,106.7297327,16z/data=!4m8!4m7!1m0!1m5!1m1!1s0x2e69f07de6955b01:0x6ce646d332b34fcd!2m2!1d106.7297327!2d-6.2620786?entry=ttu"
+                  target="_blank"
+                >
+                  <div
+                    class="border w-9 h-9 flex items-center justify-center rounded-full mt-5 hover:bg-myPrimary hover:text-white hover:border-myPrimary cursor-pointer transition-all duration-300"
+                  >
+                    <i class="fa-solid fa-arrow-right"></i>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card for Kemanggisan -->
+        <div
+          class="flex bg-slate-100 flex-col rounded-xl shadow-lg overflow-hidden"
+          data-aos="flip-left"
+          data-aos-duration="1000"
+          data-aos-delay="150"
+        >
+          <div style="overflow: hidden; max-width: 100%; height: 300px">
+            <div
+              id="display-google-map"
+              style="height: 100%; width: 100%; max-width: 100%"
+            >
+              <iframe
+                style="height: 100%; width: 100%; border: 0"
+                frameborder="0"
+                src="https://www.google.com/maps/embed/v1/place?q=binus+kemanggisan&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8"
+              ></iframe>
+            </div>
+            <a
+              class="googl-ehtml"
+              href="https://www.bootstrapskins.com/themes"
+              id="get-data-for-map"
+              >premium bootstrap themes</a
+            >
+            <style>
+              #display-google-map img {
+                max-width: none !important;
+                background: none !important;
+                font-size: inherit;
+                font-weight: inherit;
+              }
+            </style>
+          </div>
+
+          <div class="flex flex-col flex-1 px-6 py-4">
+            <div class="font-bold text-2xl text-slate-700 mb-2 md:text-3xl">
+              Kemanggisan📍
+            </div>
+            <div class="flex flex-col flex-1 justify-end">
+              <hr />
+              <div class="flex items-center justify-between">
+                <a
+                  href="https://www.google.com/maps/dir//BINUS+University,+Kampus+BINUS+Anggrek+Jl.+Raya+Kb.+Jeruk+No.27+RT.1%2FRW.9,+Kemanggisan+Palmerah,+West+Jakarta+City,+Jakarta+11530/@-6.2017585,106.7822547,16z/data=!4m5!4m4!1m0!1m2!1m1!1s0x2e69f6dcc7d2c4ad:0x209cb1eef39be168"
+                  target="_blank"
+                  class="underline mt-2 whitespace-nowrap"
+                  >Lihat selengkapnya</a
+                >
+                <a
+                  href="https://www.google.com/maps/dir//BINUS+University,+Kampus+BINUS+Anggrek+Jl.+Raya+Kb.+Jeruk+No.27+RT.1%2FRW.9,+Kemanggisan+Palmerah,+West+Jakarta+City,+Jakarta+11530/@-6.2017585,106.7822547,16z/data=!4m5!4m4!1m0!1m2!1m1!1s0x2e69f6dcc7d2c4ad:0x209cb1eef39be168"
+                  target="_blank"
+                >
+                  <div
+                    class="border w-9 h-9 flex items-center justify-center rounded-full mt-5 hover:bg-myPrimary hover:text-white hover:border-myPrimary cursor-pointer transition-all duration-300"
+                  >
+                    <i class="fa-solid fa-arrow-right"></i>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card for Kebayoran Lama -->
+        <div
+          class="flex bg-slate-100 flex-col rounded-xl shadow-lg overflow-hidden"
+          data-aos="flip-left"
+          data-aos-duration="1000"
+          data-aos-delay="250"
+        >
+          <div style="overflow: hidden; max-width: 100%; height: 300px">
+            <div
+              id="display-google-map"
+              style="height: 100%; width: 100%; max-width: 100%"
+            >
+              <iframe
+                style="height: 100%; width: 100%; border: 0"
+                frameborder="0"
+                src="https://www.google.com/maps/embed/v1/place?q=universitas+pertamina&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8"
+              ></iframe>
+            </div>
+            <a
+              class="googl-ehtml"
+              href="https://www.bootstrapskins.com/themes"
+              id="get-data-for-map"
+              >premium bootstrap themes</a
+            >
+            <style>
+              #display-google-map img {
+                max-width: none !important;
+                background: none !important;
+                font-size: inherit;
+                font-weight: inherit;
+              }
+            </style>
+          </div>
+
+          <div class="flex flex-col flex-1 px-6 py-4">
+            <div class="font-bold text-2xl text-slate-700 mb-2 md:text-3xl">
+              Kebayoran Lama📍
+            </div>
+            <div class="flex flex-col flex-1 justify-end">
+              <hr />
+              <div class="flex items-center justify-between">
+                <a
+                  href="https://www.google.com/maps/dir//Universitas+Pertamina+Jl.+Teuku+Nyak+Arief+RT.7%2FRW.8,+Simprug+Kebayoran+Lama,+South+Jakarta+City,+Jakarta+12220/@-6.2285507,106.7889774,16z/data=!4m8!4m7!1m0!1m5!1m1!1s0x2e69f13094c83677:0x1f4300031365732b!2m2!1d106.7889774!2d-6.2285507?entry=ttu"
+                  target="_blank"
+                  class="underline mt-2 whitespace-nowrap"
+                  >Lihat selengkapnya</a
+                >
+                <a
+                  href="https://www.google.com/maps/dir//Universitas+Pertamina+Jl.+Teuku+Nyak+Arief+RT.7%2FRW.8,+Simprug+Kebayoran+Lama,+South+Jakarta+City,+Jakarta+12220/@-6.2285507,106.7889774,16z/data=!4m8!4m7!1m0!1m5!1m1!1s0x2e69f13094c83677:0x1f4300031365732b!2m2!1d106.7889774!2d-6.2285507?entry=ttu"
+                  target="_blank"
+                >
+                  <div
+                    class="border w-9 h-9 flex items-center justify-center rounded-full mt-5 hover:bg-myPrimary hover:text-white hover:border-myPrimary cursor-pointer transition-all duration-300"
+                  >
+                    <i class="fa-solid fa-arrow-right"></i>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card for semarang -->
+        <div
+          class="flex bg-slate-100 flex-col rounded-xl shadow-lg overflow-hidden"
+          data-aos="flip-left"
+          data-aos-duration="1000"
+          data-aos-delay="350"
+        >
+          <div style="overflow: hidden; max-width: 100%; height: 300px">
+            <div
+              style="
+                overflow: hidden;
+                resize: none;
+                max-width: 100%;
+                width: 100%;
+                height: 500px;
+              "
+            >
+              <div
+                id="embed-ded-map-canvas"
+                style="height: 100%; width: 100%; max-width: 100%"
+              >
+                <iframe
+                  style="height: 100%; width: 100%; border: 0"
+                  frameborder="0"
+                  src="https://www.google.com/maps/embed/v1/place?q=genuk,+semarang&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8"
+                ></iframe>
+              </div>
+              <a
+                class="embed-ded-maphtml"
+                href="https://www.bootstrapskins.com/themes"
+                id="grab-map-info"
+                >premium bootstrap themes</a
+              ><style>
+                #embed-ded-map-canvas img {
+                  max-width: none !important;
+                  background: none !important;
+                  font-size: inherit;
+                  font-weight: inherit;
+                }
+              </style>
+            </div>
+          </div>
+
+          <div class="flex flex-col flex-1 px-6 py-4">
+            <div class="font-bold text-2xl text-slate-700 mb-2 md:text-3xl">
+              Semarang, Jawa Timur📍
+            </div>
+            <div class="flex flex-col flex-1 justify-end">
+              <hr />
+              <div class="flex items-center justify-between">
+                <a
+                  href="https://www.google.com/maps/dir//Genuk+Semarang+City+Central+Java/@-6.9691741,110.481832,12z/data=!4m5!4m4!1m0!1m2!1m1!1s0x2e70f329d40c709b:0x7011704c5215bf1e"
+                  target="_blank"
+                  class="underline mt-2 whitespace-nowrap"
+                  >Lihat selengkapnya</a
+                >
+                <a
+                  href="https://www.google.com/maps/dir//Genuk+Semarang+City+Central+Java/@-6.9691741,110.481832,12z/data=!4m5!4m4!1m0!1m2!1m1!1s0x2e70f329d40c709b:0x7011704c5215bf1e"
+                  target="_blank"
+                >
+                  <div
+                    class="border w-9 h-9 flex items-center justify-center rounded-full mt-5 hover:bg-myPrimary hover:text-white hover:border-myPrimary cursor-pointer transition-all duration-300"
+                  >
+                    <i class="fa-solid fa-arrow-right"></i>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- droppoint SECTION END -->
+
+    <!-- SECTION HELP START -->
+    <section id="help" class="bg-slate-100 px-4 pt-24 pb-12">
+      <div class="container mx-auto px-6">
+        <h1
+          class="text-center mb-6 text-3xl font-montserrat text-myPrimary font-bold md:text-4xl"
+        >
+          Need Help?
+        </h1>
+        <div class="flex flex-col items-center">
+          <p
+            class="text-center text-myPrimary mb-6 max-w-xl text-lg md:text-2xl"
+          >
+            Punya pertanyaan tentang layanan kami? Jangan ragu untuk menghubungi
+            kami melalui WhatsApp. Anda dapat menghubungi kami dengan mengklik
+            tombol di bawah.
+          </p>
+          <div class="flex justify-center space-x-4">
+            <a
+              href="https://wa.me/6281225775455"
+              class="bg-transparent shadow-lg hover:bg-green-700 text-myDark font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline hover:text-white md:text-2xl"
+              target="_blank"
+            >
+              <i class="fa-brands fa-whatsapp"></i> Lets tell us!
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- SECTION HELP END -->
+
+    <!-- FOOTER START -->
+    <footer class="bg-slate-200 text-white py-10">
+      <div class="container mx-auto px-6">
+        <div class="flex flex-wrap justify-between">
+          <!-- About Us -->
+          <div class="max-w-60 md:w-1/3 mb-6 mr-1">
+            <h2 class="text-2xl font-bold mb-4 text-myDark md:text-3xl">
+              About Us
+            </h2>
+            <p class="text-slate-400 md:text-lg">
+              We are a leading company in providing quality services and
+              products to our customers. Our mission is to deliver excellence in
+              everything we do.
+            </p>
+          </div>
+
+          <!-- Informations -->
+          <div class="w-full md:w-1/3 mb-6">
+            <h2 class="text-2xl font-bold mb-4 text-myDark md:text-3xl">
+              Informations
+            </h2>
+            <ul>
+              <li class="mb-2">
+                <a
+                  href="#home"
+                  class="text-slate-400 hover:text-myPrimary md:text-lg"
+                  >Home</a
+                >
+              </li>
+              <li class="mb-2">
+                <a
+                  href="#services"
+                  class="text-slate-400 hover:text-myPrimary md:text-lg"
+                  >Services</a
+                >
+              </li>
+              <li class="mb-2">
+                <a
+                  href="#about"
+                  class="text-slate-400 hover:text-myPrimary md:text-lg"
+                  >About Us</a
+                >
+              </li>
+              <li class="mb-2">
+                <a
+                  href="#droppoint"
+                  class="text-slate-400 hover:text-myPrimary md:text-lg"
+                  >Drop Point</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Contact Us -->
+          <div class="w-full md:w-1/3 mb-6">
+            <h2 class="text-2xl font-bold mb-4 text-myDark md:text-3xl">
+              Contact Us
+            </h2>
+            <p class="text-slate-400 mb-4 md:text-lg">
+              <i class="fas fa-map-marker-alt mr-2"></i> Kebayoran Lama, Jakarta
+              Selatan, Indonesia
+            </p>
+            <p class="text-slate-400 mb-4 md:text-lg">
+              <i class="fas fa-phone mr-2"></i>+62 878-0505-2003
+            </p>
+          </div>
+        </div>
+        <div
+          class="mt-6 border-t border-slate-700 pt-6 flex justify-between items-center md:text-lg"
+        >
+          <p class="text-slate-400">
+            © 2024 Reshoesncare. All rights reserved.
+          </p>
+          <div class="flex space-x-4">
+            <a
+              href="https://www.instagram.com/reshoesncare"
+              class="text-slate-400 hover:text-myPrimary"
+              target="_blank"
+              ><i class="fab fa-instagram"></i
+            ></a>
+            <a
+              href="https://www.tiktok.com/@reshoesncare"
+              class="text-slate-400 hover:text-myPrimary"
+              target="_blank"
+              ><i class="fab fa-tiktok"></i
+            ></a>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- FOOTER END -->
+
+    <!-- FEATURE TO TOP START -->
+    <a
+      href="#home"
+      class="fixed bottom-4 right-4 z-[9999] hidden h-14 w-14 items-center justify-center rounded-full bg-myPrimary p-4 animate-bounce"
+      id="feature-to-top"
+    >
+      <span class="mt-2 block h-5 w-5 rotate-45 border-t-2 border-l-2"></span>
+    </a>
+    <!-- FEATURE TO TOP END -->
+
+    <!-- SCRIPT AOS START -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+      AOS.init();
+    </script>
+    <!-- SCRIPT AOS END -->
+
+    <script src="{{ url_for('static', filename='js/home-user.js') }}"></script>
+  </body>
+</html>

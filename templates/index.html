@@ -1,0 +1,208 @@
+<!doctype html>
+<html class="scroll-smooth" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Reshoesncare</title>
+    <!-- logo for website start -->
+    <link rel="website icon" href="./static/img/icon-website.jpg" type="jpg" />
+    <!-- logo for website end -->
+
+    <!-- google font start -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- google font end -->
+
+    <!-- font awesome start -->
+    <script
+      src="https://kit.fontawesome.com/d8c46daaeb.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <!-- font awesome end -->
+
+    <!-- ajax and jquery links start -->
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.js"
+      integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"
+      integrity="sha512-3j3VU6WC5rPQB4Ld1jnLV7Kd5xr+cq9avvhwqzbH/taCRNURoeEpoPBK9pDyeukwSxwRPJ8fDgvYXd6SkaZ2TA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <!-- ajax and jquery links end -->
+
+    <!-- AOS LIBRARY START -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <!-- AOS LIBRARY END -->
+
+    <!-- output css tailwind start -->
+    <link
+      href="{{ url_for('static', filename='css/output.css') }}"
+      rel="stylesheet"
+    />
+    <!-- output css tailwind end -->
+  </head>
+  <body>
+    <!-- HEADER START -->
+    <header
+      class="bg-transparent absolute top-0 left-0 w-full flex items-center z-10"
+    >
+      <div class="container">
+        <div class="flex items-center justify-between relative">
+          <div class="px-4">
+            <a href="#home" class="block">
+              <div class="w-14 rounded-xl overflow-hidden" id="logo">
+                <img src="../static/img/logo.png" class="w-16" alt="" />
+              </div>
+            </a>
+          </div>
+          <div class="flex items-center px-8">
+
+            <button
+              class="btn text-base text-white py-2 mx-8 flex bg-myPrimary rounded-lg px-4 hover:bg-orange-600"
+              onclick="my_modal_3.showModal()"
+            >
+              <i class="fa-solid fa-person-walking-dashed-line-arrow-right"></i>
+            </button>
+            <dialog id="my_modal_3" class="modal modal-bottom sm:modal-middle">
+              <div class="modal-box">
+                <form method="dialog">
+                  <button
+                    class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+                  >
+                    ✕
+                  </button>
+                </form>
+                <h3
+                  class="font-bold text-lg text-center font-poppins text-orange-600"
+                >
+                  Login sebagai:
+                </h3>
+                <div class="flex justify-evenly mt-5 font-poppins">
+                  <a
+                    href="{{ url_for('login_admin') }}"
+                    class="bg-orange-300 w-auto text-white py-2 px-4 rounded-full inline-block text-center hover:bg-myPrimary hover:text-white transition duration-300"
+                    ><i class="fa-solid fa-user-gear"></i> Admin</a
+                  >
+                  <a
+                    href="{{ url_for('login') }}"
+                    class="bg-orange-300 w-auto text-white py-2 px-4 rounded-full inline-block text-center hover:bg-myPrimary hover:text-white transition duration-300"
+                    ><i class="fa-solid fa-user"></i> Customer</a
+                  >
+                </div>
+              </div>
+            </dialog>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- HEADER END -->
+
+    <!-- HERO SECTION START -->
+    <section id="home" class="flex items-center h-screen overflow-x-hidden">
+      <div class="container mx-auto px-4">
+        <div class="w-full flex h-full">
+          <div class="md:flex md:flex-col w-full">
+            <h1
+              class="text-5xl font-montserrat font-bold text-myPrimary text-center lg:text-6xl lg:mx-40 myh1"
+              style="text-shadow: 0 0 10px rgb(255, 216, 126)"
+            ></h1>
+            <h2
+              class="font-poppins px-4 py-5 text-myDark text-justify sm:mx-2 sm:tracking-tight md:tracking-normal md:text-center md:text-xl lg:text-center lg:text-xl lg:px-52 te-100"
+              data-aos="fade-down"
+              data-aos-duration="3000"
+              data-aos-delay="3000"
+            >
+              Our service offer top-notch shoe cleaning at
+              <span class="text-orange-400 text-2xl font-medium"
+                >budget-friendly prices</span
+              >, ensuring
+              <span class="text-orange-400 text-2xl font-medium"
+                >high-quality</span
+              >
+              without draining your wallet. You can keep your shoes in pristine
+              condition without having to spend a fortune.
+            </h2>
+            <div
+              class="flex justify-center md:flex md:justify-center"
+              data-aos="fade-up"
+              data-aos-duration="3000"
+              data-aos-delay="3000"
+            >
+              <a
+                href="/login"
+                class="bg-myPrimary text-base py-3 mx-4 px-8 rounded-full text-slate-100 hover:opacity-80 transition duration-300 ease-in-out lg:text-center lg:w-60 lg:font-bold"
+                >WANT TO TRY?</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- HERO SECTION END -->
+
+    <!-- FOOTER START -->
+    <footer class="bg-slate-200 text-white pb-10">
+      <div class="container mx-auto px-6">
+        <div
+          class="mt-6 border-t border-slate-700 pt-6 flex justify-between items-center md:text-lg"
+        >
+          <p class="text-slate-400">
+            © 2024 Reshoesncare. All rights reserved.
+          </p>
+          <div class="flex space-x-4">
+            <a
+              href="https://www.instagram.com/reshoesncare"
+              class="text-slate-400 hover:text-myPrimary"
+              target="_blank"
+              ><i class="fab fa-instagram"></i
+            ></a>
+            <a
+              href="https://www.tiktok.com/@reshoesncare"
+              class="text-slate-400 hover:text-myPrimary"
+              target="_blank"
+              ><i class="fab fa-tiktok"></i
+            ></a>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- FOOTER END -->
+
+    <!-- GSAP START -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/TextPlugin.min.js"></script>
+    <script>
+      gsap.registerPlugin(TextPlugin);
+      gsap.to(".myh1", {
+        duration: 6,
+        delay: 0,
+        text: "CLEAN YOUR SHOES WITHOUT CLEAN YOUR WALLET.",
+      });
+    </script>
+    <!-- GSAP END -->
+
+    <!-- SCRIPT AOS START -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+      AOS.init();
+    </script>
+    <!-- SCRIPT AOS END -->
+
+  </body>
+</html>
